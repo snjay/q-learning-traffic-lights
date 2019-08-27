@@ -1,2 +1,14 @@
 # MacOS
 .DS_Store
+
+# Pycharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Virtual env
+env/
+
+# Misc
+__pycache__/
