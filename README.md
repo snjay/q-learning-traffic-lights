@@ -8,7 +8,7 @@ At each tick, the Q-learning agent assesses the current environment state in ord
 
 Image courtesy: [Wikipedia](https://en.wikipedia.org/wiki/Q-learning)
 
-Credits: [names]
+This code was originally created as a part of a university course but I've continued onwards and built things on top and extended features. Credits for the original code (from the first commit) are my fellow team members: Jay Motwani, Harrison Waters & Erny Tsao. 
 
 ## Reinforcement learning
 
@@ -25,15 +25,14 @@ Finally, the agent selects its policy such that there is an element of explorati
 Make sure you are running Python 3.7+
 
 ```bash
-> python3 -V
-Python 3.7.0
+python3 -V
 ```
 
 Install requirements
 
 ```bash
 # Install requirements inside a virtual environment
-> (venv) pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Usage
@@ -42,13 +41,13 @@ Run the simulation
 
 ```bash
 # Run simulator
-> (venv) python3 traffic.py
+python3 traffic.py
 ```
 
 Plot results
 
 ```bash
-> python3 plot_performance.py
+python3 plot_performance.py
 ```
 
 ---
