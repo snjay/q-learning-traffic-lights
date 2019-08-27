@@ -16,12 +16,7 @@ GREEN = (0, 128, 0)
 C1 = (0, 166, 255)
 
 screen = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('Traffic Sim')
-
-
-# def text_objects(text, font):
-#     text_surface = font.render(text, True, BLACK)
-#     return text_surface, text_surface.get_rect()
+pygame.display.set_caption('Q-learning traffic lights')
 
 
 class Car(object):
@@ -157,7 +152,7 @@ def start():
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                write_to_file("count" + str(count) + ".csv", performance_dict)
+                write_to_file(f"count_{count}.csv", performance_dict)
                 pygame.quit()
                 quit()
 
@@ -173,6 +168,7 @@ def start():
             if car_to_append == 3:
                 bottomCars.append(Car(283, 590, 10, 10, bottomLight, bottomCars))
 
+        # Draw lanes
         pygame.draw.rect(screen, BLACK, (280, 0, 38, 600))
         pygame.draw.rect(screen, BLACK, (0, 280, 600, 38))
 
@@ -193,13 +189,13 @@ def start():
 
         # (3) Choose action a' based off next state
         # (3a) Uncomment next line for manual switch every 10 counts
-        # action = Action.SWITCH if count % 10 == 0 else Action.STAY
+        action = Action.SWITCH if count % 3 == 0 else Action.STAY
         # (3b) Uncomment next line for q_learning switch
-        action = q_learning_agent.next_best_action(state=new_state)
+        # action = q_learning_agent.next_best_action(state=new_state)
 
         # Uncomment for timer to let you know # time of steps elapsed
-        # if count % 10000 == 0:
-        #     print('count =', count)
+        if count % 1000 == 0:
+            print('count =', count // 1000)
         time_delay = max(time_delay - 1, 0)
 
         # Uncomment below to set an upper bound for the simulation's FPS

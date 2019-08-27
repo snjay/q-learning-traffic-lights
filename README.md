@@ -59,6 +59,18 @@ python3 plot_performance.py
 
 ---
 
+## Results
+
+Q-learning (Orange) vs switching automatically every 3 ticks (Blue)
+
+![q_learning_vs_fast_switch.png](q_learning_vs_fast_switch.png)
+
+X-axis are clock ticks (in 1000s) and the y-axis is the penalty score. The penalty score is given by the sum total of the number of cars waiting at both intersections every 1000 clock ticks.
+
+As you can see, Q-learning performs better as the simulation runs.
+
+---
+
 ### Todo
 
 - write up docs for plotting performance tests
