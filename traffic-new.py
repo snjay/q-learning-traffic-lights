@@ -1,9 +1,17 @@
 import time
 import random
 
-LANE_LENGTH = 10
-NUM_LANES = 1
-lanes = [[0] * LANE_LENGTH * 2 for i in range(NUM_LANES)]
+LANE_LENGTH = 8
+NUM_LANES = 2
+lanes, lights = [], []
+for i in range(NUM_LANES):
+    lanes.append([0] * LANE_LENGTH * 2)
+    lights.append(i % 2 == 0)
+
+
+def switch_lights():
+    global lights
+    lights = [not l for l in lights]
 
 
 def min_dist_from_light(lane_id: int):
@@ -15,16 +23,21 @@ def min_dist_from_light(lane_id: int):
 
 def update_cars(lane_id: int, count: int):
     lane = lanes[lane_id]
+    lights_are_on = lights[lane_id]
     should_generate_new_car = count % (random.randint(0, 10) + 5) == 0
-    lane.insert(0, 1) if should_generate_new_car else lane.insert(0, 0)
-    lane.pop()
+    if lights_are_on:
+        lane.insert(0, 1) if should_generate_new_car else lane.insert(0, 0)
+        lane.pop()
 
 
 def traffic_simulation():
-    epsiodes = range(100)
+    epsiodes = range(1000)
     for t in epsiodes:
-        [update_cars(lane_id=r, count=t) for r in range(len(lanes))]
-        print(lanes[0], min_dist_from_light(0), end='\r')
+        for r in range(len(lanes)):
+            update_cars(lane_id=r, count=t)
+        if t % 50 == 0:
+            switch_lights()
+        print(lanes, min_dist_from_light(0), lights, end='\r')
         time.sleep(0.05)
     print()
     pass
